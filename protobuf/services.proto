@@ -1,0 +1,33 @@
+syntax = "proto3";
+package services;
+
+import "google/protobuf/empty.proto";
+//import "google/proto/any.proto";
+
+
+// methods front app
+service Stocks {
+    rpc getStock (Ticker) returns (Stock) {}
+    rpc getAllStocks (google.protobuf.Empty) returns (allStocks) {}
+    rpc add (Ticker) returns (google.protobuf.Empty) {}
+}
+
+message Ticker {
+    string name = 1;
+}
+
+message Stock {
+    string name = 1;
+    string eps = 2;
+    string price = 3;
+}
+
+message allStocks {
+    repeated Stock data = 1;
+}
+
+
+// methods parser service
+service Parser {
+    rpc addParse (Ticker) returns (Stock) {}
+}
